@@ -1,0 +1,4 @@
+Perancangan Database
+
+- buat menjadi diagram pembuatan database (ERD)
+- 
