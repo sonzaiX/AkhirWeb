@@ -2,3 +2,28 @@ Perancangan Database
 
 - buat menjadi diagram pembuatan database (ERD)
 - 
+
+Entitas = tabel
+Atribut = kolom
+
+tutor membuat database
+
+-membaut identitas dan atribut
+-mencari informasi yang sebanyak-banyaknya yang terkait dengan dia
+-membangun hubungan
+-identifikasi opsionalitas dan cardinalitas
+-periksa model, apakah cocok atau tidak
+
+maybe = garis putus2
+must be = solid = garisnya tidak putus
+satu atau lebih = kaki gagak (segitiga terdapat garis di tengah) 
+satu = one and only one
+
+
+mengarah ke tabel tersebut
+Each Order(nama tabel)
+must be (jenis garis)
+placed by (nama baris)
+one and only one (jenis kaki)
+customer
+

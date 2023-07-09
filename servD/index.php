@@ -1,44 +1,50 @@
 <?php
-
 session_start();
 include 'koneksi.php';
 
-$query = "SELECT username, password, peran from Pelanggan";
-$sql = mysqli_query($link, $query);
-while ($hasil = mysqli_fetch_array($sql)) {
-    $username = stripslashes($hasil['username']);
-    $pass = stripslashes($hasil['password']);
-    $peran = stripslashes($hasil['peran']);
-}
-
 // Cek apakah form login telah disubmit
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Mendapatkan nilai inputan username dan password
+    // Mendapatkan nilai inputan username dan katasandi
     $userIN = $_POST["username"];
-    $passIN = $_POST["password"];
+    $passIN = $_POST["katasandi"];
 
-    // Lakukan validasi login sesuai dengan aturan yang Anda tentukan
-    // Misalnya, lakukan pengecekan pada tabel pengguna dalam database
-    // ...
+    // Mendapatkan data pengguna dari database
+    $query = "SELECT username, katasandi, peran FROM Pelanggan WHERE username = ?";
+    $stmt = mysqli_prepare($link, $query);
+    mysqli_stmt_bind_param($stmt, "s", $userIN);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
-    // Contoh validasi untuk admin
-    if ($userIN === $username && $passIN === $pass) {
-        if ($peran === 'admin') {
+    // Memeriksa apakah terdapat hasil data
+    if (mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+        $username = $row['username'];
+        $katasandi = $row['katasandi'];
+        $peran = $row['peran'];
+
+        // Memeriksa kesesuaian katasandi
+        if ($passIN === $katasandi) {
             $_SESSION["username"] = $username;
-            header("Location: client/index.php");
-            exit();
+
+            // Redirect sesuai peran pengguna
+            if ($peran === 'admin') {
+                header("Location: admin/index.php");
+                exit();
+            } else {
+                header("Location: client/index.php");
+                exit();
+            }
         } else {
-            $_SESSION["username"] = $username;
-            header("Location: admin/index.php");
-            exit();
+            // Jika katasandi tidak sesuai, tampilkan pesan error
+            $error = "Katasandi salah.";
         }
     } else {
-        // Jika login gagal, tampilkan pesan error
-        $error = "Username atau password salah.";
+        // Jika username tidak ditemukan, tampilkan pesan error
+        $error = "Username salah.";
     }
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -59,8 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required><br>
 
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required><br>
+                <label for="katasandi">Katasandi:</label>
+                <input type="password" id="katasandi" name="katasandi" required><br>
 
                 <input type="submit" value="Login">
             </form>

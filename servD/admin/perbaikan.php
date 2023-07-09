@@ -5,10 +5,10 @@ include "../koneksi.php";
 if (isset($_POST['submit'])) {
     $idPerbaikan = $_POST['id_perbaikan'];
     $status = $_POST['status'];
-    $estimasiSelesai = $_POST['estimasi'];
+    $estimasiSelesai = $_POST['Estimasi'];
 
     // Update status dan estimasi selesai ke dalam tabel
-    $query = "UPDATE Perbaikan SET status = '$status', estimasi = '$estimasi' WHERE id_perbaikan = '$idPerbaikan'";
+    $query = "UPDATE Perbaikan SET status = '$status', estimasi = '$estimasiSelesai' WHERE id_perbaikan = '$idPerbaikan'";
     $sql = mysqli_query($link, $query);
 
     if ($sql) {
@@ -63,8 +63,8 @@ include 'menu.php'; ?>
                         </select>
                         <br><br>
                         
-                        <label for="estimasi">Tanggal Estimasi Selesai:</label>
-                        <input type="date" name="estimasi" id="estimasi">
+                        <label for="Estimasi">Tanggal Estimasi Selesai:</label>
+                        <input type="date" name="Estimasi" id="Estimasi">
                         <br><br>
                         <input type="submit" name="submit" value="Submit">
                         <input type="reset" value="Reset">

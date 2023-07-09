@@ -24,8 +24,8 @@
                     <p><strong>Kontak:</strong> <?php echo $row['Kontak']; ?></p>
                     <p><strong>E-Mail:</strong> <?php echo $row['E-Mail']; ?></p>
                     <p><strong>Nama User:</strong> <?php echo $row['Nama User']; ?></p>
-                    <a class="card-link" href="edit.php?id=<?php echo $row['id_user']; ?>">Edit</a>    |
-                    <a class="card-link" href="hapus.php?id=<?php echo $row['id_user']; ?>">Hapus</a>
+                    <a class="card-link" href="edit_client.php?id=<?php echo $row['id_user']; ?>">Edit</a>    |
+                    <a class="card-link" href="hapus_client.php?id=<?php echo $row['id_user']; ?>">Hapus</a>
                 </div>
             </div>
         <?php } ?>

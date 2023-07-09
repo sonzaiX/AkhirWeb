@@ -1,76 +1,57 @@
 <?php
-include "koneksi.php";
-//proses input berita
-if (isset($_POST['Input'])) {
-    $judul = addslashes (strip_tags ($_POST['judul']));
-    $kategori = $_POST['kategori'];
-    $headline = addslashes (strip_tags ($_POST['headline']));
-    $isi_berita = addslashes (strip_tags ($_POST['isi']));
-    $pengirim = addslashes (strip_tags ($_POST['pengirim']));
-    //insert ke tabel
-    $query = "INSERT INTO berita VALUES ('$kategori', '$judul', '$headline', '$isi_berita', '$pengirim', NOW(), '0')";
-    $sql = mysqli_query ($link,$query); if ($sql) {
-    echo "<script> alert('Berita telah berhasil ditambahkan');
-    window.location = 'index.php';</script>";
+include "../koneksi.php";
+session_start();
+
+if (isset($_SESSION["username"])) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Ambil data dari form
+        $merek = $_POST["merek"];
+        $model = $_POST["model"];
+        $sn = $_POST["sn"];
+        $deskripsi = $_POST["deskripsi"];
+
+        // Validasi dan lakukan operasi tambah laptop
+
+        // Simpan data ke database
+        $query = "INSERT INTO Device (merek, model, SN, deskripsi) VALUES (?, ?, ?, ?)";
+        $stmt = mysqli_prepare($link, $query);
+        mysqli_stmt_bind_param($stmt, "ssss", $merek, $model, $sn, $deskripsi);
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result) {
+            // Redirect ke halaman detail laptop setelah sukses tambah laptop
+            header("Location: detail_laptop.php");
+            exit();
+        } else {
+            echo "Terjadi kesalahan saat menambah laptop.";
+        }
+    }
 } else {
-    echo "<h2><font color=red>Berita gagal ditambahkan</font></h2>";
-}
+    // Jika user tidak login, maka arahkan ke halaman login atau lakukan tindakan lain sesuai kebutuhan Anda.
+    header("Location: login.php");
+    exit(); // Hentikan eksekusi skrip setelah melakukan redirect.
 }
 ?>
+
 <html>
-    <head><title>Surat Kabar UNIMUS</title>
-        <link rel="stylesheet" href="..\style.css">
-    </head>
+<head>
+    <?php //include "header.php";
+        include "menu.php"; ?>
+    <title>Tambah Laptop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
-    <?php include "header.php";
-    include "menu.php";?>
-        <br><br>
-        <FORM ACTION="" METHOD="POST" NAME="input">
-        <table cellpadding="0" cellspacing="0" border="0" width="700">
-        <tr>
-        <td colspan="2"><h2>Input Berita</h2></td>
-        </tr>
-        <tr>
-        <td width="200">Judul Berita</td>
-        <td>: <input type="text" name="judul" size="30" required> </td>
-        </tr>
-        <tr>
-        <td>Kategori</td>
-        <td>:
-        <select name="kategori">
-    <?php
-    $query = "SELECT id_kategori, nm_kategori FROM kategori
-    ORDER BY nm_kategori";
-    $sql = mysqli_query ($link,$query);
-    while ($hasil = mysqli_fetch_array ($sql)) {
-        echo "<option value='$hasil[id_kategori]'>$hasil[nm_kategori]</option>";
-    }
-    ?>
-    </select></td>
-    </tr>
-    <tr>
-        <td>Headline Berita</td>
-        <td>: <textarea name="headline" cols="50" rows="4"
-        required></textarea></td>
-    </tr>
-    <tr>
-        <td>Isi Berita</td>
-        <td>: <textarea name="isi" cols="50" rows="10"
-        required></textarea></td>
-    </tr>
-    <tr>
-        <td>Pengirim</td>
-        <td>: <input type="text" name="pengirim" size="20"></td>
-    </tr>
-    <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;&nbsp;<input type="submit" name="Input"
-        value="Input Berita">&nbsp;
-        <input type="reset" name="reset" value="Cancel">
-        </td>
-    </tr>
-    </table>
-    </FORM>
-    <?php include "footer.php"; ?>
-    </body>
+    <h2>Tambah Laptop</h2>
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+        <label for="merek">Merek Device:</label>
+        <input type="text" name="merek" id="merek" required><br>
+        <label for="model">Model Device:</label>
+        <input type="text" name="model" id="model" required><br>
+        <label for="sn">Serial Number:</label>
+        <input type="text" name="sn" id="sn" required><br>
+        <label for="deskripsi">Deskripsi Device:</label>
+        <textarea name="deskripsi" id="deskripsi" required></textarea><br>
+        <input type="submit" value="Tambah">
+    </form>
+</body>
 </html>
