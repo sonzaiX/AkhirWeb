@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   WHERE id_device = ?";
         
         $stmt = mysqli_prepare($link, $query);
-        mysqli_stmt_bind_param($stmt, "sssssi", $merekDevice, $modelDevice, $tipeDevice, $deskripsiDevice, $serialNumber, $iddevice);
+        mysqli_stmt_bind_param($stmt, "ssssi", $merekDevice, $modelDevice, $tipeDevice, $deskripsiDevice, $serialNumber, $iddevice);
         $result = mysqli_stmt_execute($stmt);
 
         if ($result) {

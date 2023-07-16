@@ -4,12 +4,8 @@ session_start();
 
 if (isset($_SESSION["username"])) {
     // Menggunakan prepared statement untuk mencegah SQL injection
-
-    $query = "SELECT Pelanggan.nama AS 'Nama Pelanggan', Device.merek AS 'Merek Device', Device.model AS 'Model Device', Device.tipe AS 'Tipe Device', Perbaikan.desk_kerusakan AS 'Deskripsi Kerusakan', Perbaikan.status AS 'Status Perbaikan', Perbaikan.tanggal_masuk AS 'Tanggal Masuk', Perbaikan.id_perbaikan, Perbaikan.estimasi AS 'Estimasi'
-    FROM Pelanggan
-    JOIN Perbaikan ON Pelanggan.id_user = Perbaikan.id_user
-    JOIN Device ON Perbaikan.id_device = Device.id_device
-    WHERE Pelanggan.username = ?";
+    
+    $query = "SELECT id_user, nama AS 'Nama Pelanggan',alamat AS 'Alamat',NomorKontak AS 'Kontak',Email AS 'E-Mail', username AS 'Nama User' from Pelanggan where username = ?";
 
     $stmt = mysqli_prepare($link, $query);
     $username = $_SESSION["username"];
@@ -20,8 +16,7 @@ if (isset($_SESSION["username"])) {
         $result = mysqli_stmt_get_result($stmt);
 
         // Memeriksa apakah terdapat hasil data
-        if (mysqli_num_rows($result) > 0) {
-    ?>
+        if (mysqli_num_rows($result) > 0) { ?>
 
 <html>
 <head>
@@ -35,7 +30,7 @@ if (isset($_SESSION["username"])) {
 <section>
         <div class="main">
             <div class="detail">
-                <h1><span>Hi, Selamat Datang <?php echo $username ?></span><br> Kami Kelompok <span style="color:#00E8F8;">5</span></h1>
+                <h1><span>Hi, Selamat Datang</span> <br> Kami Kelompok <span style="color:#00E8F8;">5</span></h1>
                 <p>Ini adalah website perbaikan <br> perangkat komputer </p>
                 <div class="social">
                     <a href="#"><i class="bi bi-github"></i></a>
@@ -51,24 +46,29 @@ if (isset($_SESSION["username"])) {
         </div>
     </section>
 
-    <h2>Riwayat</h2>
+    <h2>Detail Client</h2>
     <br>
-    <div class="grid-container">
+    <div class="grid-container" id="grid-container-dalamProses">
         <?php while ($row = mysqli_fetch_assoc($result)) { ?>
             <div class="card">
                 <div class="card-header"><?php echo $row['Nama Pelanggan']; ?></div>
                 <div class="card-content">
-                    <p><strong>Merek Device:</strong> <?php echo $row['Merek Device']; ?></p>
-                    <p><strong>Model Device:</strong> <?php echo $row['Model Device']; ?></p>
-                    <p><strong>Tipe Device:</strong> <?php echo $row['Tipe Device']; ?></p>
-                    <p><strong>Deskripsi Kerusakan:</strong> <?php echo $row['Deskripsi Kerusakan']; ?></p>
-                    <p><strong>Status Perbaikan:</strong> <?php echo $row['Status Perbaikan']; ?></p>
-                    <p><strong>Tanggal Masuk:</strong> <?php echo $row['Tanggal Masuk']; ?></p>
-                    <p><strong>Tanggal Selesai:</strong> <?php echo $row['Estimasi']; ?></p>
+                    <p><strong>Alamat:</strong> <?php echo $row['Alamat']; ?></p>
+                    <p><strong>Kontak:</strong> <?php echo $row['Kontak']; ?></p>
+                    <p><strong>E-Mail:</strong> <?php echo $row['E-Mail']; ?></p>
+                    <p><strong>Nama User:</strong> <?php echo $row['Nama User']; ?></p>
+                    <form action="edit_client.php" method="GET" style="display: inline;">
+                        <input type="hidden" name="id" value="<?php echo $row['id_user']; ?>">
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form action="hapus_client.php" method="GET" style="display: inline;">
+                        <input type="hidden" name="id" value="<?php echo $row['id_user']; ?>">
+                        <button type="submit">Hapus</button>
+                    </form>
                 </div>
             </div>
         <?php } ?>
-        </div>
+    </div>
     <br><br>
     </body>
 <style>
@@ -77,8 +77,8 @@ if (isset($_SESSION["username"])) {
 </html>
 
 <?php
-        } else { 
-            echo "<script> alert('Belum ada data, tambahkan Data dulu!'); window.location ='index.php';</script>";
+        } else {
+            echo "<br><br><strong>Belum ada data</strong>";
         }
     } else {
         echo "Terjadi kesalahan dalam eksekusi prepared statement.";

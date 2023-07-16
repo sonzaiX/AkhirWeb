@@ -24,12 +24,14 @@ if (isset($_GET['id'])) {
         <head>
             <?php include "menu.php"; ?>
             <title>Edit Data Perbaikan</title>
-            <link rel="stylesheet" href="css/style.css">
+            <link rel="stylesheet" href="style.css">
         </head>
         <body>
             <h2>Edit Data Perbaikan</h2>
             <form action="update_laptop.php" method="POST">
                 <input type="hidden" name="id" value="<?php echo $row['id_perbaikan']; ?>">
+                <label for="nama">Nama Pelanggan:</label>
+                <input type="text" name="nama" id="nama" value="<?php echo $row['Nama Pelanggan']; ?>" readonly><br>
                 <label for="merek">Merek Device:</label>
                 <input type="text" name="merek" id="merek" value="<?php echo $row['Merek Device']; ?>"><br>
                 <label for="model">Model Device:</label>

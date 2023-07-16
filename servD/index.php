@@ -45,34 +45,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 <head>
-    <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="stylelogin.css">
+  <meta charset="utf-8" />
+  <title>servD</title>
+  <link rel="stylesheet" href="style-login.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" />
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <h2>Login</h2>
+  <div id="login">
+    <form action="" method="POST" name="form-login">
+    <h2>Login</h2>
+        <?php if (isset($error)) { ?>
+            <p class="error"><?php echo $error; ?></p>
+        <?php } ?>
+        <input type="text" class="input" id="username" name="username" placeholder="Username" />
+        <input type="password" class="input" id="katasandi" name="katasandi" placeholder="Password" />
+        <input type="submit" value="Login" class="submitbtn"> 
+        <p>Belum memiliki akun? <a href="tambah_akun.php">Daftar Sekarang</a></p>
 
-            <?php if (isset($error)) { ?>
-                <p class="error"><?php echo $error; ?></p>
-            <?php } ?>
-
-            <form action="" method="POST">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required><br>
-
-                <label for="katasandi">Katasandi:</label>
-                <input type="password" id="katasandi" name="katasandi" required><br>
-
-                <input type="submit" value="Login">
-            </form>
-
-            <p>Belum memiliki akun? <a href="tambah_akun.php">Tambah Akun</a></p>
-        </div>
-    </div>
+    </form>
+  </div>
 </body>
 </html>

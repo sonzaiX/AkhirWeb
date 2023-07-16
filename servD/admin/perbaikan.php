@@ -30,18 +30,36 @@ $sql = mysqli_query($link, $query);
 ?>
 
 <html>
-
 <head>
-<?php //include 'header.php';
-include 'menu.php'; ?>
-
     <title>Data Perbaikan</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <?php include "menu.php"; ?>
 </head>
-
 <body>
-    <h2>Data Perbaikan</h2>
-    <div class="grid-container">
+
+<section>
+        <div class="main">
+            <div class="detail">
+                <h1><span>Hi, Selamat Datang</span> <br> Kami Kelompok <span style="color:#00E8F8;">5</span></h1>
+                <p>Ini adalah website perbaikan <br> perangkat komputer </p>
+                <div class="social">
+                    <a href="#"><i class="bi bi-github"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <br>
+                </div>
+            </div>
+            <div class="images">
+                <img src="us.jpg" alt="" width="100%">
+            </div>
+        </div>
+    </section>
+
+    <h2>Data Perangkat yang dalam Perbaikan</h2>
+    <br>
+    <div class="grid-container" id="grid-container-dalamProses">
         <?php while ($row = mysqli_fetch_assoc($sql)) { ?>
             <div class="card">
                 <div class="card-header"><?php echo $row['Nama Pelanggan']; ?></div>
@@ -75,5 +93,7 @@ include 'menu.php'; ?>
     </div>
     <br><br>
 </body>
-
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+</style>
 </html>

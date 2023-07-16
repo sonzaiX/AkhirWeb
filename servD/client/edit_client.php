@@ -5,7 +5,7 @@ if (isset($_GET['id'])) {
     $idUser = $_GET['id'];
 
     // Mengambil data client berdasarkan ID
-    $query = "SELECT id_user, nama AS 'Nama Pelanggan', alamat AS 'Alamat', NomorKontak AS 'Kontak', Email AS 'E-Mail', username AS 'Nama User' FROM Pelanggan WHERE id_user = ?";
+    $query = "SELECT id_user, nama AS 'Nama Pelanggan', alamat AS 'Alamat', NomorKontak AS 'Kontak', Email AS 'E-Mail', username AS 'Nama User', katasandi AS 'Password' FROM Pelanggan WHERE id_user = ?";
     
     $stmt = mysqli_prepare($link, $query);
     mysqli_stmt_bind_param($stmt, "i", $idUser);
@@ -36,6 +36,9 @@ if (isset($_GET['id'])) {
                 <input type="email" name="email" id="email" value="<?php echo $row['E-Mail']; ?>"><br>
                 <label for="username">Nama User:</label>
                 <input type="text" name="username" id="username" value="<?php echo $row['Nama User']; ?>"><br>
+                <label for="katasandi">Password:</label>
+                <input type="text" name="katasandi" id="katasandi" value="<?php echo $row['Password']; ?>"><br>
+                
                 <input type="submit" value="Update">
                 <input type="reset" value="Reset">
             </form>

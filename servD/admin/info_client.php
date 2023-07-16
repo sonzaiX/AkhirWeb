@@ -8,14 +8,35 @@
 
 <html>
 <head>
-    <?php //include "header.php";
-        include "menu.php";?>
     <title>Informasi Client</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <?php include "menu.php"; ?>
 </head>
 <body>
+
+<section>
+        <div class="main">
+            <div class="detail">
+                <h1><span>Hi, Selamat Datang</span> <br> Kami Kelompok <span style="color:#00E8F8;">5</span></h1>
+                <p>Ini adalah website perbaikan <br> perangkat komputer </p>
+                <div class="social">
+                    <a href="#"><i class="bi bi-github"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <br>
+                </div>
+            </div>
+            <div class="images">
+                <img src="us.jpg" alt="" width="100%">
+            </div>
+        </div>
+    </section>
+
     <h2>Detail Client</h2>
-    <div class="grid-container">
+    <br>
+    <div class="grid-container" id="grid-container-dalamProses">
         <?php while ($row = mysqli_fetch_assoc($sql)) { ?>
             <div class="card">
                 <div class="card-header"><?php echo $row['Nama Pelanggan']; ?></div>
@@ -24,12 +45,21 @@
                     <p><strong>Kontak:</strong> <?php echo $row['Kontak']; ?></p>
                     <p><strong>E-Mail:</strong> <?php echo $row['E-Mail']; ?></p>
                     <p><strong>Nama User:</strong> <?php echo $row['Nama User']; ?></p>
-                    <a class="card-link" href="edit_client.php?id=<?php echo $row['id_user']; ?>">Edit</a>    |
-                    <a class="card-link" href="hapus_client.php?id=<?php echo $row['id_user']; ?>">Hapus</a>
+                    <form action="edit_client.php" method="GET" style="display: inline;">
+                        <input type="hidden" name="id" value="<?php echo $row['id_user']; ?>">
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form action="hapus_client.php" method="GET" style="display: inline;">
+                        <input type="hidden" name="id" value="<?php echo $row['id_user']; ?>">
+                        <button type="submit">Hapus</button>
+                    </form>
                 </div>
             </div>
         <?php } ?>
     </div>
     <br><br>
-</body>
+    </body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+</style>
 </html>

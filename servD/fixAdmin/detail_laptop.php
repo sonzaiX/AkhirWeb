@@ -13,30 +13,30 @@ $sql = mysqli_query($link, $query);
 <html>
 <head>
     <title>Data Perbaikan</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <?php include "menu.php"; ?>
 </head>
 <body>
 
 <section>
-    <div class="main">
-        <div class="detail">
-            <h1><span>Hi, Selamat Datang</span> <br> Kami Kelompok <span style="color:#00E8F8;">5</span></h1>
-            <p>Ini adalah website perbaikan <br> perangkat komputer </p>
-            <div class="social">
-                <a href="#"><i class="bi bi-github"></i></a>
-                <a href="#"><i class="bi bi-instagram"></i></a>
-                <a href="#"><i class="bi bi-linkedin"></i></a>
-                <a href="#"><i class="bi bi-facebook"></i></a>
-                <br>
+        <div class="main">
+            <div class="detail">
+                <h1><span>Hi, Selamat Datang</span> <br> Kami Kelompok <span style="color:#00E8F8;">5</span></h1>
+                <p>Ini adalah website perbaikan <br> perangkat komputer </p>
+                <div class="social">
+                    <a href="#"><i class="bi bi-github"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <br>
+                </div>
+            </div>
+            <div class="images">
+                <img src="us.jpg" alt="" width="100%">
             </div>
         </div>
-        <div class="images">
-            <img src="us.jpg" alt="" width="100%">
-        </div>
-    </div>
-</section>
+    </section>
 
 
     <h2>Detail Laptop</h2>

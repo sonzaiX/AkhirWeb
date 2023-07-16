@@ -5,7 +5,7 @@ if (isset($_GET['id'])) {
     $idPerbaikan = $_GET['id'];
 
     // Mengambil data perbaikan berdasarkan ID
-    $query = "SELECT Perbaikan.id_perbaikan, Pelanggan.nama AS 'Nama Pelanggan', Device.merek AS 'Merek Device', Device.model AS 'Model Device', Device.tipe AS 'Tipe Device', Device.deskripsi AS 'Deskripsi Device', Device.sn AS 'Serial Number'
+    $query = "SELECT Perbaikan.id_perbaikan, Device.id_device, Pelanggan.nama AS 'Nama Pelanggan', Device.merek AS 'Merek Device', Device.model AS 'Model Device', Device.tipe AS 'Tipe Device', Device.deskripsi AS 'Deskripsi Device', Device.sn AS 'Serial Number'
               FROM Pelanggan
               JOIN Perbaikan ON Pelanggan.id_user = Perbaikan.id_user
               JOIN Device ON Perbaikan.id_device = Device.id_device
@@ -24,14 +24,12 @@ if (isset($_GET['id'])) {
         <head>
             <?php include "menu.php"; ?>
             <title>Edit Data Perbaikan</title>
-            <link rel="stylesheet" href="style.css">
+            <link rel="stylesheet" href="css/style.css">
         </head>
         <body>
             <h2>Edit Data Perbaikan</h2>
             <form action="update_laptop.php" method="POST">
-                <input type="hidden" name="id" value="<?php echo $row['id_perbaikan']; ?>">
-                <label for="nama">Nama Pelanggan:</label>
-                <input type="text" name="nama" id="nama" value="<?php echo $row['Nama Pelanggan']; ?>" readonly><br>
+                <input type="hidden" name="id" value="<?php echo $row['id_device']; ?>">
                 <label for="merek">Merek Device:</label>
                 <input type="text" name="merek" id="merek" value="<?php echo $row['Merek Device']; ?>"><br>
                 <label for="model">Model Device:</label>

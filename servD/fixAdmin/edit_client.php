@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
         <head>
             <?php include "menu.php"; ?>
             <title>Edit Data Client</title>
-            <link rel="stylesheet" href="css/style.css">
+            <link rel="stylesheet" href="style.css">
         </head>
         <body>
             <h2>Edit Data Client</h2>
