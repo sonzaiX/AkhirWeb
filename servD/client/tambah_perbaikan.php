@@ -16,7 +16,10 @@ if (isset($_SESSION["username"])) {
         $username = $_SESSION["username"];
 
         // Ambil ID user berdasarkan username
-        $queryUser = "SELECT id_user FROM Pelanggan WHERE username = ?";
+        $queryUser = "SELECT pl.id_pelanggan, ak.id_user
+        FROM pelanggan pl 
+        JOIN akun ak ON pl.id_pelanggan = ak.id_pelanggan 
+        WHERE ak.username = ?";
         $stmtUser = mysqli_prepare($link, $queryUser);
         mysqli_stmt_bind_param($stmtUser, "s", $username);
         mysqli_stmt_execute($stmtUser);
@@ -28,7 +31,7 @@ if (isset($_SESSION["username"])) {
             $idUser = $rowUser['id_user'];
 
             // Simpan data ke tabel Device
-            $query1 = "INSERT INTO Device (merek, model, tipe, SN, deskripsi) VALUES (?, ?, ?, ?, ?)";
+            $query1 = "INSERT INTO Device (id_device, merek, model, tipe, SN, deskripsi) VALUES ('',?, ?, ?, ?, ?)";
             $stmt1 = mysqli_prepare($link, $query1);
             mysqli_stmt_bind_param($stmt1, "sssss", $merek, $model, $tipe, $sn, $deskripsi);
             $result1 = mysqli_stmt_execute($stmt1);
@@ -38,14 +41,14 @@ if (isset($_SESSION["username"])) {
                 $deviceID = mysqli_insert_id($link);
 
                 // Simpan data ke tabel Perbaikan dengan nilai id_user yang sudah didapatkan
-                $query2 = "INSERT INTO Perbaikan (id_user, id_device, desk_kerusakan, status, tanggal_masuk) VALUES (?, ?, ?, 'Tertunda', NOW())";
+                $query2 = "INSERT INTO Perbaikan (id_pelanggan, id_device, desk_kerusakan, status, perangkat_masuk) VALUES (?, ?, ?, 'Tertunda', NOW())";
                 $stmt2 = mysqli_prepare($link, $query2);
                 mysqli_stmt_bind_param($stmt2, "iis", $idUser, $deviceID, $desk_kerusakan);
                 $result2 = mysqli_stmt_execute($stmt2);
 
                 if ($result2) {
                     // Redirect atau tampilkan pesan sukses setelah selesai menyimpan data di kedua tabel
-                    header("Location: detail_laptop.php");
+                    header("Location: detail_perangkat.php");
                     exit();
                 } else {
                     echo "Terjadi kesalahan saat menambah data ke tabel Perbaikan.";
@@ -59,7 +62,7 @@ if (isset($_SESSION["username"])) {
     }
 } else {
     // Jika user tidak login, maka arahkan ke halaman login atau lakukan tindakan lain sesuai kebutuhan Anda.
-    header("Location: login.php");
+    header("Location: ../index.php");
     exit(); // Hentikan eksekusi skrip setelah melakukan redirect.
 }
 ?>

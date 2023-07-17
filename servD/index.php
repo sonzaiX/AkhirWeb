@@ -9,7 +9,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $passIN = $_POST["katasandi"];
 
     // Mendapatkan data pengguna dari database
-    $query = "SELECT username, katasandi, peran FROM Pelanggan WHERE username = ?";
+    $query = "SELECT pl.id_pelanggan, ak.id_user, pl.nama, pl.alamat, pl.telepon, pl.email, ak.username, ak.katasandi, ak.peran
+              FROM pelanggan pl
+              JOIN akun ak ON pl.id_pelanggan = ak.id_pelanggan
+              WHERE ak.username = ?";
     $stmt = mysqli_prepare($link, $query);
     mysqli_stmt_bind_param($stmt, "s", $userIN);
     mysqli_stmt_execute($stmt);

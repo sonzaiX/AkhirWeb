@@ -3,7 +3,7 @@ include "../koneksi.php";
 
 $query = "SELECT Perbaikan.id_perbaikan, Pelanggan.nama AS 'Nama Pelanggan', Device.merek AS 'Merek Device', Device.model AS 'Model Device', Device.tipe AS 'Tipe Device', Device.sn AS 'Serial Number', Device.deskripsi AS 'Deskripsi Device'
 FROM Pelanggan
-JOIN Perbaikan ON Pelanggan.id_user = Perbaikan.id_user
+JOIN Perbaikan ON Pelanggan.id_pelanggan = Perbaikan.id_pelanggan
 JOIN Device ON Perbaikan.id_device = Device.id_device
 ORDER BY Pelanggan.nama ASC";
 
@@ -20,12 +20,12 @@ $sql = mysqli_query($link, $query);
 <div class="container">
     <?php include "menu2.php" ?>
         <div class="main-content-card">
-            <h2>Data Perbaikan yang Masih dalam Proses</h2>
+            <h2>Detail Perangkat</h2>
             <br>
             <div class="main">
             <div class="grid-container" id="grid-container-dalamProses">
                 <?php while ($row = mysqli_fetch_assoc($sql)) { ?>
-                <div class="card">
+                    <div class="card">
                     <div class="card-header"><?php echo $row['Nama Pelanggan']; ?></div>
                     <div class="card-content">
                     <p><strong>Merek Device:</strong> <?php echo $row['Merek Device']; ?></p>
@@ -36,7 +36,8 @@ $sql = mysqli_query($link, $query);
                     
                     </div>
                         </div>
-                    <br><br>
+                    <br>
+                    
                 <?php } ?>
             </div>
             </div>

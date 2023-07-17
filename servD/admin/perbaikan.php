@@ -19,49 +19,34 @@ if (isset($_POST['submit'])) {
     }
 }
 
-$query = "SELECT Pelanggan.nama AS 'Nama Pelanggan', Device.merek AS 'Merek Device', Device.model AS 'Model Device', Device.tipe AS 'Tipe Device', Perbaikan.desk_kerusakan AS 'Deskripsi Kerusakan', Perbaikan.status AS 'Status Perbaikan', Perbaikan.tanggal_masuk AS 'Tanggal Masuk', Perbaikan.id_perbaikan, Perbaikan.estimasi AS 'Estimasi'
+$query = "SELECT Pelanggan.nama AS 'Nama Pelanggan', Device.merek AS 'Merek Device', Device.model AS 'Model Device', Device.tipe AS 'Tipe Device', Perbaikan.desk_kerusakan AS 'Deskripsi Kerusakan', Perbaikan.status AS 'Status Perbaikan', Perbaikan.perangkat_masuk AS 'Tanggal Masuk', Perbaikan.estimasi_selesai AS 'Estimasi', Perbaikan.id_perbaikan
 FROM Pelanggan
-JOIN Perbaikan ON Pelanggan.id_user = Perbaikan.id_user
+JOIN Perbaikan ON Pelanggan.id_pelanggan = Perbaikan.id_pelanggan
 JOIN Device ON Perbaikan.id_device = Device.id_device
-where Perbaikan.status != 'Selesai'
+WHERE Perbaikan.status != 'Selesai'
 ORDER BY Pelanggan.nama ASC";
+
 
 $sql = mysqli_query($link, $query);
 ?>
 
 <html>
 <head>
-    <title>Data Perbaikan</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Dalam Proses</title>
+    <link rel="stylesheet" href="css/style-sidebar.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <?php include "menu.php"; ?>
 </head>
 <body>
 
-<section>
-        <div class="main">
-            <div class="detail">
-                <h1><span>Hi, Selamat Datang</span> <br> Kami Kelompok <span style="color:#00E8F8;">5</span></h1>
-                <p>Ini adalah website perbaikan <br> perangkat komputer </p>
-                <div class="social">
-                    <a href="#"><i class="bi bi-github"></i></a>
-                    <a href="#"><i class="bi bi-instagram"></i></a>
-                    <a href="#"><i class="bi bi-linkedin"></i></a>
-                    <a href="#"><i class="bi bi-facebook"></i></a>
-                    <br>
-                </div>
-            </div>
-            <div class="images">
-                <img src="us.jpg" alt="" width="100%">
-            </div>
-        </div>
-    </section>
-
-    <h2>Data Perangkat yang dalam Perbaikan</h2>
-    <br>
-    <div class="grid-container" id="grid-container-dalamProses">
-        <?php while ($row = mysqli_fetch_assoc($sql)) { ?>
-            <div class="card">
+<div class="container">
+    <?php include "menu2.php" ?>
+        <div class="main-content-card">
+            <h2>Data Perbaikan yang Masih dalam Proses</h2>
+            <br>
+            <div class="main">
+            <div class="grid-container" id="grid-container-dalamProses">
+                <?php while ($row = mysqli_fetch_assoc($sql)) { ?>
+                    <div class="card">
                 <div class="card-header"><?php echo $row['Nama Pelanggan']; ?></div>
                 <div class="card-content">
                     <p><strong>Merek Device:</strong> <?php echo $row['Merek Device']; ?></p>
@@ -70,7 +55,7 @@ $sql = mysqli_query($link, $query);
                     <p><strong>Deskripsi Kerusakan:</strong> <?php echo $row['Deskripsi Kerusakan']; ?></p>
                     <p><strong>Status Perbaikan:</strong> <?php echo $row['Status Perbaikan']; ?></p>
                     <p><strong>Tanggal Masuk:</strong> <?php echo $row['Tanggal Masuk']; ?></p>
-                    <p><strong>Tanggal Selesai:</strong> <?php echo $row['Estimasi']; ?></p>
+                    <p><strong>Tanggal Selesai:</strong> <?php echo $row['Estimasi']; ?></p><br>
                     <form action="" method="POST">
                         <input type="hidden" name="id_perbaikan" value="<?php echo $row['id_perbaikan']; ?>">
                         <label for="status">Ubah Status:</label>
@@ -80,16 +65,17 @@ $sql = mysqli_query($link, $query);
                             <option value="Selesai">Selesai</option>
                         </select>
                         <br><br>
-                        
-                        <label for="Estimasi">Tanggal Estimasi Selesai:</label>
-                        <input type="date" name="Estimasi" id="Estimasi">
-                        <br><br>
                         <input type="submit" name="submit" value="Submit">
                         <input type="reset" value="Reset">
                     </form>
                 </div>
             </div>
-        <?php } ?>
+                <?php } ?>
+            </div>
+            </div>
+        </div>
+        </div>
+</div>    
     </div>
     <br><br>
 </body>
