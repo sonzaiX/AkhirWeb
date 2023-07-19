@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = mysqli_stmt_execute($stmt);
 
         if ($result) {
-            echo "<script> alert('Data telah berhasil diedit'); window.location ='detail_laptop.php';</script>";
+            echo "<script> alert('Data telah berhasil diedit'); window.location ='detail_perangkat.php';</script>";
         } else {
             echo "Terjadi kesalahan dalam memperbarui data perbaikan.";
         }

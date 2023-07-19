@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Periksa keberhasilan update
         if (mysqli_stmt_affected_rows($stmt) > 0) {
-            echo "<script> alert('Data telah berhasil diupdate'); window.location ='detail_laptop.php';</script>";
+            echo "<script> alert('Data telah berhasil diupdate'); window.location ='detail_perangkat.php';</script>";
         } else {
             echo "<script> alert('Terjadi kesalahan dalam memperbarui data'); window.location ='edit_laptop.php?id=$idDevice';</script>";
         }

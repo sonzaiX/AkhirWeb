@@ -1,0 +1,6 @@
+bagaimana jika di databse saya terbagi atas 4 tabel yaitu
+
+pelanggan(id_pelanggan,nama,alamat,telepon,email)
+akun(id_user,id_pelanggan,username,katasandi,peran)
+device(id_device,merek,model,tipe,deskripsi,sn)
+perbaikan(id_perbaikan,id_pelanggan,id_device,desk_kerusakan,status,perangkat_masuk,estimasi_selesai)

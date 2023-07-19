@@ -3,7 +3,7 @@ include "../koneksi.php";
 session_start();
 
 if (isset($_SESSION["username"])) {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Ambil data dari form
         $merek = $_POST["merek"];
         $model = $_POST["model"];
@@ -16,10 +16,10 @@ if (isset($_SESSION["username"])) {
         $username = $_SESSION["username"];
 
         // Ambil ID user berdasarkan username
-        $queryUser = "SELECT pl.id_pelanggan, ak.id_user
-        FROM pelanggan pl 
-        JOIN akun ak ON pl.id_pelanggan = ak.id_pelanggan 
-        WHERE ak.username = ?";
+        $queryUser = "SELECT ak.id_user, pl.id_pelanggan
+                      FROM akun AS ak
+                      JOIN pelanggan AS pl ON ak.id_pelanggan = pl.id_pelanggan
+                      WHERE ak.username = ?";
         $stmtUser = mysqli_prepare($link, $queryUser);
         mysqli_stmt_bind_param($stmtUser, "s", $username);
         mysqli_stmt_execute($stmtUser);
@@ -29,21 +29,22 @@ if (isset($_SESSION["username"])) {
         if (mysqli_num_rows($resultUser) == 1) {
             $rowUser = mysqli_fetch_assoc($resultUser);
             $idUser = $rowUser['id_user'];
+            $idPelanggan = $rowUser['id_pelanggan'];
 
             // Simpan data ke tabel Device
-            $query1 = "INSERT INTO Device (id_device, merek, model, tipe, SN, deskripsi) VALUES ('',?, ?, ?, ?, ?)";
+            $query1 = "INSERT INTO device (merek, model, tipe, deskripsi, sn) VALUES (?, ?, ?, ?, ?)";
             $stmt1 = mysqli_prepare($link, $query1);
-            mysqli_stmt_bind_param($stmt1, "sssss", $merek, $model, $tipe, $sn, $deskripsi);
+            mysqli_stmt_bind_param($stmt1, "sssss", $merek, $model, $tipe, $deskripsi, $sn);
             $result1 = mysqli_stmt_execute($stmt1);
 
             if ($result1) {
                 // Dapatkan ID data yang baru saja disimpan di tabel Device
                 $deviceID = mysqli_insert_id($link);
 
-                // Simpan data ke tabel Perbaikan dengan nilai id_user yang sudah didapatkan
-                $query2 = "INSERT INTO Perbaikan (id_pelanggan, id_device, desk_kerusakan, status, perangkat_masuk) VALUES (?, ?, ?, 'Tertunda', NOW())";
+                // Simpan data ke tabel Perbaikan dengan nilai id_user dan id_device yang sudah didapatkan
+                $query2 = "INSERT INTO perbaikan (id_pelanggan, id_device, desk_kerusakan, status, perangkat_masuk) VALUES (?, ?, ?, 'Tertunda', NOW())";
                 $stmt2 = mysqli_prepare($link, $query2);
-                mysqli_stmt_bind_param($stmt2, "iis", $idUser, $deviceID, $desk_kerusakan);
+                mysqli_stmt_bind_param($stmt2, "iis", $idPelanggan, $deviceID, $desk_kerusakan);
                 $result2 = mysqli_stmt_execute($stmt2);
 
                 if ($result2) {
@@ -71,12 +72,15 @@ if (isset($_SESSION["username"])) {
 <head>
     <title>Tambah Laptop</title>
     <link rel="stylesheet" href="css/styleInput.css">
-    <?php include "menu.php"; ?>
 </head>
 <body>
-    <div id="formInput">
-    <h2>Tambah Laptop</h2>
-    <br>
+<div class="container">
+    <?php include "menu2.php" ?>
+        <div class="main-content-card">
+            <h2>Data Perbaikan yang Masih dalam Proses</h2>
+            <br>
+            <div class="main">
+            <div class="grid-container" id="grid-container-dalamProses">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" name="form-login">
             <label for="merek">Merek Device:</label>
             <input type="text" name="merek" id="merek" required class="formtambah"><br>
@@ -92,6 +96,10 @@ if (isset($_SESSION["username"])) {
             <textarea name="desk_kerusakan" id="desk_kerusakan" required class="formtambah"></textarea><br>
             <input type="submit" value="Tambah" class="submitbtn">
         </form>
-    </div>
+        </div>
+            </div>
+        </div>
+        </div>
+</div>    
 </body>
 </html>

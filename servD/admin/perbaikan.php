@@ -5,10 +5,9 @@ include "../koneksi.php";
 if (isset($_POST['submit'])) {
     $idPerbaikan = $_POST['id_perbaikan'];
     $status = $_POST['status'];
-    $estimasiSelesai = $_POST['Estimasi'];
 
     // Update status dan estimasi selesai ke dalam tabel
-    $query = "UPDATE Perbaikan SET status = '$status', estimasi = '$estimasiSelesai' WHERE id_perbaikan = '$idPerbaikan'";
+    $query = "UPDATE Perbaikan SET status = '$status', estimasi_selesai = '$estimasiSelesai' WHERE id_perbaikan = '$idPerbaikan'";
     $sql = mysqli_query($link, $query);
 
     if ($sql) {
@@ -27,8 +26,7 @@ WHERE Perbaikan.status != 'Selesai'
 ORDER BY Pelanggan.nama ASC";
 
 
-$sql = mysqli_query($link, $query);
-?>
+$sql = mysqli_query($link, $query); ?>
 
 <html>
 <head>

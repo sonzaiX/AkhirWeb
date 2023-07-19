@@ -5,7 +5,10 @@ if (isset($_GET['id'])) {
     $idUser = $_GET['id'];
 
     // Mengambil data client berdasarkan ID
-    $query = "SELECT id_user, nama AS 'Nama Pelanggan', alamat AS 'Alamat', NomorKontak AS 'Kontak', Email AS 'E-Mail', username AS 'Nama User', katasandi AS 'Password' FROM Pelanggan WHERE id_user = ?";
+    $query = "SELECT A.id_user, P.nama AS 'Nama Pelanggan', P.alamat AS 'Alamat', P.telepon AS 'Kontak', P.email AS 'E-Mail', A.username AS 'Nama User', A.katasandi AS 'Password' 
+              FROM pelanggan AS P 
+              JOIN akun AS A ON P.id_pelanggan = A.id_pelanggan 
+              WHERE A.id_user = ?";
     
     $stmt = mysqli_prepare($link, $query);
     mysqli_stmt_bind_param($stmt, "i", $idUser);
@@ -18,12 +21,16 @@ if (isset($_GET['id'])) {
         ?>
         <html>
         <head>
-            <?php include "menu.php"; ?>
             <title>Edit Data Client</title>
             <link rel="stylesheet" href="css/style.css">
         </head>
-        <body>
+        <div class="container">
+    <?php include "menu2.php" ?>
+        <div class="main-content-card">
             <h2>Edit Data Client</h2>
+            <br>
+            <div class="main">
+            <div class="grid-container" id="grid-container-dalamProses">
             <form action="update_client.php" method="POST">
                 <input type="hidden" name="id" value="<?php echo $row['id_user']; ?>">
                 <label for="nama">Nama Pelanggan:</label>
@@ -42,6 +49,11 @@ if (isset($_GET['id'])) {
                 <input type="submit" value="Update">
                 <input type="reset" value="Reset">
             </form>
+            </div>
+            </div>
+        </div>
+        </div>
+</div>    
         </body>
         </html>
         <?php

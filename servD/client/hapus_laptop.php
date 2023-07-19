@@ -13,9 +13,9 @@ if (isset($_GET['id'])) {
 
     // Periksa keberhasilan penghapusan
     if (mysqli_stmt_affected_rows($stmt) > 0) {
-        echo "<script> alert('Data telah berhasil dihapus'); window.location ='detail_laptop.php';</script>";
+        echo "<script> alert('Data telah berhasil dihapus'); window.location ='detail_perangkat.php';</script>";
     } else {
-        echo "<script> alert('Gagal Menghapus Data'); window.location ='detail_laptop.php';</script>";
+        echo "<script> alert('Gagal Menghapus Data'); window.location ='detail_perangkat.php';</script>";
     }
 } else {
     echo "ID perbaikan tidak diberikan.";

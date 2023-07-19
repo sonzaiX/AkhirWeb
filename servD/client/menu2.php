@@ -46,7 +46,7 @@
           </a>
         </li>
         <li>
-          <a href="tentang_kami.php" class="<?php echo ($activeIndex === 4) ? 'active' : ''; ?>" title="Reports Link">
+          <a href="about_us.php" class="<?php echo ($activeIndex === 4) ? 'active' : ''; ?>" title="Reports Link">
             <div class="icon">
                 <img src="assets/reports.svg" title="Reports Icon">
             </div>

@@ -5,7 +5,7 @@ if (isset($_GET['id'])) {
     $idPelanggan = $_GET['id'];
 
     // Menghapus data client berdasarkan ID
-    $query = "DELETE FROM Pelanggan WHERE id_user = ?";
+    $query = "DELETE FROM Pelanggan WHERE id_pelanggan = ?";
     
     $stmt = mysqli_prepare($link, $query);
     mysqli_stmt_bind_param($stmt, "i", $idPelanggan);

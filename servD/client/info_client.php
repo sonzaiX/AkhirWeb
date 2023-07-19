@@ -45,10 +45,7 @@ if (isset($_SESSION["username"])) {
                         <input type="hidden" name="id" value="<?php echo $row['id_user']; ?>">
                         <button type="submit">Edit</button>
                     </form>
-                    <form action="hapus_client.php" method="GET" style="display: inline;">
-                        <input type="hidden" name="id" value="<?php echo $row['id_user']; ?>">
-                        <button type="submit">Hapus</button>
-                    </form>
+                    
                     </div>
                         </div>
                     <br>
