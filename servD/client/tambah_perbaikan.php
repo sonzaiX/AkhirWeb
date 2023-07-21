@@ -77,28 +77,33 @@ if (isset($_SESSION["username"])) {
 <div class="container">
     <?php include "menu2.php" ?>
         <div class="main-content-card">
-            <h2>Data Perbaikan yang Masih dalam Proses</h2>
+            <h2>Tambah Perbaikan</h2>
             <br>
             <div class="main">
             <div class="grid-container" id="grid-container-dalamProses">
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" name="form-login">
-            <label for="merek">Merek Device:</label>
-            <input type="text" name="merek" id="merek" required class="formtambah"><br>
-            <label for="model">Model Device:</label>
-            <input type="text" name="model" id="model" required class="formtambah"><br>
-            <label for="tipe">Tipe Device:</label>
-            <input type="text" name="tipe" id="tipe" required class="formtambah"><br>
-            <label for="sn">Serial Number:</label>
-            <input type="text" name="sn" id="sn" required class="formtambah"><br>
-            <label for="deskripsi">Deskripsi Device:</label>
-            <textarea name="deskripsi" id="deskripsi" required class="formtambah"></textarea><br>
-            <label for="desk_kerusakan">Deskripsi Kerusakan:</label>
-            <textarea name="desk_kerusakan" id="desk_kerusakan" required class="formtambah"></textarea><br>
-            <input type="submit" value="Tambah" class="submitbtn">
-        </form>
-        </div>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" name="form-login" class="form-input">
+                <label for="merek">Merek Device:</label>
+                <input type="text" name="merek" id="merek" required class="formtambah"><br>
+                <label for="model">Model Device:</label>
+                <input type="text" name="model" id="model" required class="formtambah"><br>
+                <label for="tipe">Tipe Device:</label>
+                <input type="text" name="tipe" id="tipe" required class="formtambah"><br>
+                <label for="sn">Serial Number:</label>
+                <input type="text" name="sn" id="sn" required class="formtambah"><br>
+                <label for="deskripsi">Deskripsi Device:</label>
+                <textarea name="deskripsi" id="deskripsi" required class="formtambah"></textarea><br>
+                <label for="desk_kerusakan">Deskripsi Kerusakan:</label>
+                <textarea name="desk_kerusakan" id="desk_kerusakan" required class="formtambah"></textarea><br>
+                <br><br>
+                <div class="button-section">
+                    <button type="submit" class="button-62" role="button" style="display: inline-block;">Tambah</button>
+                </div>    
             </div>
-        </div>
+                
+
+            </form>
+            </div>
+            </div>
         </div>
 </div>    
 </body>

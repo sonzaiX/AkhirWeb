@@ -41,18 +41,17 @@ if (isset($_SESSION["username"])) {
                     <p><strong>Kontak:</strong> <?php echo $row['Kontak']; ?></p>
                     <p><strong>E-Mail:</strong> <?php echo $row['E-Mail']; ?></p>
                     <p><strong>Nama User:</strong> <?php echo $row['Nama User']; ?></p>
-                    <form action="edit_client.php" method="GET" style="display: inline;">
-                        <input type="hidden" name="id" value="<?php echo $row['id_user']; ?>">
-                        <button type="submit">Edit</button>
-                    </form>
                     
-                    </div>
-                        </div>
-                    <br>
-                    
+                </div>
+                </div>
+                <br>
                 <?php } ?>
             </div>
             </div>
+            <form action="edit_client.php" method="GET"">
+                <input type="hidden" name="id" value="<?php echo $row['id_user']; ?>">
+                <button type="submit" class="button-62" role="button">Edit</button>
+            </form>
         </div>
         </div>
 </div>    
@@ -67,7 +66,7 @@ if (isset($_SESSION["username"])) {
     }
 } else {
     // Jika user tidak login, maka arahkan ke halaman login atau lakukan tindakan lain sesuai kebutuhan Anda.
-    header("Location: login.php");
+    header("Location: ../index.php");
     exit(); // Hentikan eksekusi skrip setelah melakukan redirect.
 }
 ?>

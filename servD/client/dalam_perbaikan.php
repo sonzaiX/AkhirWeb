@@ -43,17 +43,26 @@
                             <p><strong>Merek Device:</strong> <?php echo $row['Merek Device']; ?></p>
                             <p><strong>Model Device:</strong> <?php echo $row['Model Device']; ?></p>
                             <p><strong>Tipe Device:</strong> <?php echo $row['Tipe Device']; ?></p>
+                            <p><strong>Serial Number:</strong> <?php echo $row['Serial Number']; ?></p>
                             <p><strong>Deskripsi Kerusakan:</strong> <?php echo $row['Deskripsi Kerusakan']; ?></p>
                             <p><strong>Status Perbaikan:</strong> <?php echo $row['Status Perbaikan']; ?></p>
                             <p><strong>Tanggal Masuk:</strong> <?php echo $row['Tanggal Masuk']; ?></p>
-                            <p><strong>Tanggal Selesai:</strong> <?php echo $row['Tanggal Selesai']; ?></p>
+                            <p><strong>Estimasi Selesai:</strong> <?php echo $row['Tanggal Selesai']; ?></p>
                         </div>
+                        
                         </div>
                     
                 <?php } ?>
+                
             </div>
+            
             </div>
-        </div>
+           
+<div style="text-align: center; display: flex;">
+    <a href="tambah_perbaikan.php"><button type="button" class="button-62" role="button">Tambah</button></a>
+</div>
+
+    </div>
         </div>
 </div>    
 </body>
@@ -78,9 +87,9 @@
             <h2>Belum ada data Perbaikan</h2>
             <div class="main">
             <br>
-            <div style="text-align: center; display: flex; ">
+            <div class="button-section">
                 <a href="tambah_perbaikan.php">Tambah Laptop untuk Diperbaiki</a>
-</div>
+            </div>
             </div>
             </div>
         </div>

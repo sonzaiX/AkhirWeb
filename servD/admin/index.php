@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="images">
-                <img src="us.jpg" alt="" width="100%">
+                <img src="assets/newIcon/US.jpg" alt="" width="100%">
             </div>
         </div>
     </section>

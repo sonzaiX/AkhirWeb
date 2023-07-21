@@ -48,10 +48,20 @@ if (isset($_SESSION["username"])) {
                         <p><strong>Tipe Device:</strong> <?php echo $row['Tipe Device']; ?></p>
                         <p><strong>Serial Number:</strong> <?php echo $row['Serial Number']; ?></p>
                         <p><strong>Deskripsi Device:</strong> <?php echo $row['Deskripsi Device']; ?></p>
-                        <a class="card-link" href="edit_laptop.php?id=<?php echo $row['id_perbaikan']; ?>">Edit</a>    |
-                        <a class="card-link" href="hapus_laptop.php?id=<?php echo $row['id_perbaikan']; ?>">Hapus</a>
+                        
+                        <div class="button-section">
+                        <!-- Menggunakan tombol Edit dan Hapus -->
+                        <form action="edit_laptop.php" method="GET">
+                            <input type="hidden" name="id" value="<?php echo $row['id_perbaikan']; ?>">
+                            <button type="submit" class="button-62" role="button">Edit</button>
+                        </form>
+                        <form action="hapus_laptop.php" method="GET">
+                            <input type="hidden" name="id" value="<?php echo $row['id_perbaikan']; ?>">
+                            <button type="submit" class="button-62-red" role="button">Hapus</button>
+                        </form>
                         </div>
-                        </div>
+                    </div>
+                    </div>
                     <br>
                     
                 <?php } ?>
@@ -74,7 +84,7 @@ if (isset($_SESSION["username"])) {
     }
 } else {
     // Jika user tidak login, maka arahkan ke halaman login atau lakukan tindakan lain sesuai kebutuhan Anda.
-    header("Location: login.php");
+    header("Location: ../index.php");
     exit(); // Hentikan eksekusi skrip setelah melakukan redirect.
 }
 ?>

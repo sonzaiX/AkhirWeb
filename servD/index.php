@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
   <meta charset="utf-8" />
   <title>servD</title>
-  <link rel="stylesheet" href="style-login.css" />
+  <link rel="stylesheet" href="css/style-login.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" />
 </head>
 <body>

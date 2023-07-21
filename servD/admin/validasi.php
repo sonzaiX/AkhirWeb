@@ -37,41 +37,49 @@ $sql = mysqli_query($link, $query);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
-<div class="container">
-    <?php include "menu2.php" ?>
+    <div class="container">
+        <?php include "menu2.php" ?>
         <div class="main-content-card">
             <h2>Data Perbaikan yang masih antri</h2>
             <br>
             <div class="main">
-            <div class="grid-container" id="grid-container-dalamProses">
-                <?php while ($row = mysqli_fetch_assoc($sql)) { ?>
-                    <div class="card">
-                    <div class="card-header"><?php echo $row['Nama Pelanggan']; ?></div>
-                    <div class="card-content">
-                    <p><strong>Merek Device:</strong> <?php echo $row['Merek Device']; ?></p>
-                    <p><strong>Model Device:</strong> <?php echo $row['Model Device']; ?></p>
-                    <p><strong>Tipe Device:</strong> <?php echo $row['Tipe Device']; ?></p>
-                    <p><strong>Deskripsi Kerusakan:</strong> <?php echo $row['Deskripsi Kerusakan']; ?></p>
-                    <p><strong>Status Perbaikan:</strong> <?php echo $row['Status Perbaikan']; ?></p>
-                    <p><strong>Tanggal Masuk:</strong> <?php echo $row['Tanggal Masuk']; ?></p><br>
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-                        <input type="hidden" name="id_perbaikan" value="<?php echo $row['id_perbaikan']; ?>">
-                        <label for="estimasi_selesai">Estimasi Selesai:</label>
-                        <input type="date" name="estimasi_selesai" id="estimasi_selesai">
-                        <input type="submit" value="Setujui">
-                    </form>
+                <div class="grid-container" id="grid-container-dalamProses">
+                    <?php while ($row = mysqli_fetch_assoc($sql)) { ?>
+                        <div class="card">
+                            <div class="card-header"><?php echo $row['Nama Pelanggan']; ?></div>
+                            <div class="card-content">
+                                <p><strong>Merek Device:</strong> <?php echo $row['Merek Device']; ?></p>
+                                <p><strong>Model Device:</strong> <?php echo $row['Model Device']; ?></p>
+                                <p><strong>Tipe Device:</strong> <?php echo $row['Tipe Device']; ?></p>
+                                <p><strong>Deskripsi Kerusakan:</strong> <?php echo $row['Deskripsi Kerusakan']; ?></p>
+                                <p><strong>Status Perbaikan:</strong> <?php echo $row['Status Perbaikan']; ?></p>
+                                <p><strong>Tanggal Masuk:</strong> <?php echo $row['Tanggal Masuk']; ?></p><br>
+                                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                                    <input type="hidden" name="id_perbaikan" value="<?php echo $row['id_perbaikan']; ?>">
+                                    <label for="estimasi_selesai">Estimasi Selesai:</label>
+                                    <input type="date" name="estimasi_selesai" id="estimasi_selesai">
+                                    <br><br>
+                                    <div class="button-section">
+                                        <button type="button" onclick="submitForm()" class="button-62" role="button">Setujui</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <br>
+                    <?php } ?>
                 </div>
             </div>
-            <br>
-                <?php } ?>
-            </div>
-            </div>
         </div>
-        </div>
-</div>    
-
+    </div>
+    <script>
+        function submitForm() {
+            // Submit form secara manual ketika tombol "Setujui" ditekan
+            document.getElementsByTagName("form")[0].submit();
+        }
+    </script>
 </body>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
 </style>
 </html>
+

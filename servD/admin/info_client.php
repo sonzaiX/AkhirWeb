@@ -29,15 +29,19 @@
                     <p><strong>Alamat:</strong> <?php echo $row['Alamat']; ?></p>
                     <p><strong>Kontak:</strong> <?php echo $row['Kontak']; ?></p>
                     <p><strong>E-Mail:</strong> <?php echo $row['E-Mail']; ?></p>
-                    <p><strong>Nama User:</strong> <?php echo $row['Nama User']; ?></p>
-                    <form action="edit_client.php" method="GET" style="display: inline;">
-                        <input type="hidden" name="id" value="<?php echo $row['id_user']; ?>">
-                        <button type="submit">Edit</button>
-                    </form>
-                    <form action="hapus_client.php" method="GET" style="display: inline;">
-                        <input type="hidden" name="id" value="<?php echo $row['id_user']; ?>">
-                        <button type="submit">Hapus</button>
-                    </form>
+                    <p><strong>Nama User:</strong> <?php echo $row['Nama User']; ?></p><br>
+                    
+                    <div class= "button-section">
+                    <form action="edit_client.php" method="GET"">
+                            <input type="hidden" name="id" value="<?php echo $row['id_user']; ?>">
+                            <button type="submit" class="button-62" role="button">Edit</button>
+                        </form>
+                        <form action="hapus_client.php" method="GET">
+                            <input type="hidden" name="id" value="<?php echo $row['id_user']; ?>">
+                            <button type="submit" class="button-62-red" role="button">Hapus</button>
+                        </form>
+                    </div>
+                       
                     </div>
                         </div>
                     <br>

@@ -20,8 +20,8 @@
                 <section>
                 <div class="main">
                     <div class="detail">
-                        <h1><span>Hi, Selamat Datang <?php echo $username ?></span> <br> Kami Kelompok <span style="color:#00E8F8;">5</span></h1>
-                        <p>Ini adalah website perbaikan <br> perangkat komputer </p>
+                        <h1><span>Hi, Selamat Datang <?php echo $username ?></span> <br> Kami Kelompok <span style="color:#00E8F8;">3</span></h1>
+                        <p>Ini adalah website manajemen perbaikan <br> perangkat komputer </p>
                         <div class="social">
                             <a href="#"><i class="bi bi-github"></i></a>
                             <a href="#"><i class="bi bi-instagram"></i></a>
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="images">
-                        <img src="us.jpg" alt="" width="100%">
+                        <img src="assets/newIcon/us.jpg" alt="" width="100%">
                     </div>
                 </div>
             </section>

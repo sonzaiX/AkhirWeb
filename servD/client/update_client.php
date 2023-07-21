@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $resultAkun = mysqli_stmt_execute($stmtAkun);
 
     if ($resultPelanggan && $resultAkun) {
-        echo "<script> alert('Data telah berhasil diedit'); window.location ='info_client.php';</script>";
+        echo "<script> alert('Data telah berhasil diedit silahkan login kembali'); window.location ='../index.php';</script>";
     } else {
         echo "Terjadi kesalahan saat memperbarui data client.";
     }

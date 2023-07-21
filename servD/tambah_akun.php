@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
   <meta charset="utf-8" />
   <title>Tambah Akun</title>
-  <link rel="stylesheet" href="style-signup.css" />
+  <link rel="stylesheet" href="css/style-signup.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" />
 </head>
 <body>

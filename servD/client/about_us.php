@@ -7,6 +7,9 @@
 <body>
     <div class="container">
         <?php include "menu2.php" ?>
+        <div class="main-content-card">
+        <h2>Tentang Kami<h2>
+        <br><br>
         <div class="container-about">
 
                     <div class="card-about">
@@ -15,7 +18,7 @@
                         </div>
                         <div class="card-about-body">
                             <span class="tag tag-teal">Software Engineer</span><br>
-                            <h4>Muh. Fatta Nur Razaq</h4><br>
+                            <h4>Muh. Fatta N.R</h4><br>
                             <h5>C2C021048</h5><br>
                             <h5>fsyam67@gmail.com</h5>
 
@@ -68,7 +71,7 @@
                             
                         </div>
                     </div>
-            
+            </div>
         </div>
     </div>
 </body>
